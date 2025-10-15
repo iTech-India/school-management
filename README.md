@@ -1,98 +1,336 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# School Management System
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A comprehensive, full-stack school management system built with modern technologies. This application provides role-based access control for Admins, Teachers, and Students, featuring attendance management, user management, and class organization.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 🚀 Features
 
-## Description
+### Admin Features
+- **Teacher Management**: Add, edit, and remove teachers with complete profile management
+- **Student Management**: Manage student records, assign to classes, track admissions
+- **Class Management**: Create and organize classes with sections
+- **Subject Management**: Define and manage subjects taught in the school
+- **Attendance Overview**: View and monitor attendance records across all classes
+- **Dashboard**: Real-time statistics and quick actions
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### Teacher Features
+- **Class Assignment**: View all assigned classes and subjects
+- **Attendance Marking**: Mark daily attendance for students with bulk operations
+- **Profile Management**: Update personal information and credentials
+- **Student Overview**: View students in assigned classes
 
-## Project setup
+### Student Features
+- **Attendance Tracking**: View personal attendance history and statistics
+- **Attendance Analytics**: Calculate attendance percentage and trends
+- **Profile Management**: Update personal information and contact details
+- **Class Information**: View assigned class and schedule
 
-```bash
-$ npm install
-```
+## 🛠️ Tech Stack
 
-## Compile and run the project
+### Backend
+- **Framework**: NestJS (Node.js)
+- **Database**: PostgreSQL
+- **ORM**: TypeORM
+- **Authentication**: JWT (JSON Web Tokens)
+- **Validation**: class-validator
+- **Password Security**: bcrypt
 
-```bash
-# development
-$ npm run start
+### Frontend
+- **Framework**: React 18
+- **Language**: TypeScript
+- **Styling**: TailwindCSS
+- **Routing**: React Router v6
+- **State Management**: React Context API
+- **HTTP Client**: Axios
+- **Forms**: React Hook Form
+- **Notifications**: React Toastify
+- **Icons**: Lucide React
+- **Build Tool**: Vite
 
-# watch mode
-$ npm run start:dev
+## 📋 Prerequisites
 
-# production mode
-$ npm run start:prod
-```
+Before you begin, ensure you have the following installed:
+- Node.js (v16 or higher)
+- PostgreSQL (v12 or higher)
+- npm or yarn package manager
 
-## Run tests
+## 🔧 Installation & Setup
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### 1. Clone the Repository
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+git clone <repository-url>
+cd school-management
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 2. Backend Setup
 
-## Resources
+```bash
+# Navigate to backend directory
+cd backend
 
-Check out a few resources that may come in handy when working with NestJS:
+# Install dependencies
+npm install
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+# Create PostgreSQL database
+createdb school_management
 
-## Support
+# Configure environment variables
+cp .env.example .env
+# Edit .env with your database credentials and JWT secret
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+# Build the project
+npm run build
 
-## Stay in touch
+# Run database migrations
+npm run migration:run
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+# Start the backend server
+npm run start:dev
+```
 
-## License
+The backend API will be available at `http://localhost:3000/api`
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+**Default Admin Credentials** (created by migration):
+- Email: `admin@school.com`
+- Password: `admin123`
+
+### 3. Frontend Setup
+
+```bash
+# Navigate to frontend directory (from root)
+cd frontend
+
+# Install dependencies
+npm install
+
+# Configure environment variables
+cp .env.example .env
+# Edit .env with your backend API URL
+
+# Start the development server
+npm run dev
+```
+
+The frontend application will be available at `http://localhost:5173`
+
+## 📁 Project Structure
+
+```
+school-management/
+├── backend/                    # NestJS Backend
+│   ├── src/
+│   │   ├── attendance/        # Attendance module
+│   │   ├── auth/              # Authentication & authorization
+│   │   ├── classes/           # Class management
+│   │   ├── config/            # Configuration files
+│   │   ├── migrations/        # Database migrations
+│   │   ├── student/           # Student module
+│   │   ├── subjects/          # Subject module
+│   │   ├── teacher/           # Teacher module
+│   │   ├── teacher-assignment/# Teacher-Class-Subject assignments
+│   │   ├── users/             # User management
+│   │   ├── app.module.ts      # Main application module
+│   │   └── main.ts            # Application entry point
+│   ├── .env.example           # Environment variables template
+│   ├── package.json
+│   └── README.md              # Backend documentation
+│
+├── frontend/                   # React Frontend
+│   ├── src/
+│   │   ├── components/        # Reusable components
+│   │   ├── context/           # React Context (Auth)
+│   │   ├── pages/             # Page components
+│   │   │   ├── admin/         # Admin pages
+│   │   │   ├── teacher/       # Teacher pages
+│   │   │   ├── student/       # Student pages
+│   │   │   └── auth/          # Authentication pages
+│   │   ├── services/          # API services
+│   │   ├── types/             # TypeScript type definitions
+│   │   ├── App.tsx            # Main app component
+│   │   └── main.tsx           # Application entry point
+│   ├── .env.example           # Environment variables template
+│   ├── package.json
+│   └── README.md              # Frontend documentation
+│
+└── README.md                   # This file
+```
+
+## 🔐 Security Features
+
+- **Password Hashing**: All passwords are securely hashed using bcrypt
+- **JWT Authentication**: Stateless authentication using JSON Web Tokens
+- **Role-Based Access Control (RBAC)**: Three distinct roles with specific permissions
+- **Protected Routes**: Frontend and backend route protection
+- **Token Expiration**: Automatic token expiration and renewal
+- **Password Reset**: Secure password setup with token-based verification
+
+## 🎯 User Roles & Permissions
+
+### Admin
+- Full access to all features
+- Manage teachers, students, classes, and subjects
+- View all attendance records
+- System configuration
+
+### Teacher
+- View assigned classes and subjects
+- Mark student attendance
+- View student information
+- Update own profile
+
+### Student
+- View personal attendance records
+- View attendance statistics
+- Update own profile
+- View class information
+
+## 🗄️ Database Schema
+
+### Main Entities
+- **Users**: Authentication and role management
+- **Teachers**: Teacher profiles and credentials
+- **Students**: Student profiles and class assignments
+- **Classes**: Class information and organization
+- **Subjects**: Subject definitions
+- **Teacher Assignments**: Teacher-Class-Subject mappings
+- **Attendances**: Daily attendance records
+
+## 📚 API Documentation
+
+### Authentication Endpoints
+- `POST /api/auth/login` - User login
+- `POST /api/auth/set-password` - Set/reset password
+
+### Teacher Endpoints
+- `GET /api/teachers` - List all teachers
+- `POST /api/teachers` - Create teacher
+- `GET /api/teachers/:id` - Get teacher details
+- `PATCH /api/teachers/:id` - Update teacher
+- `DELETE /api/teachers/:id` - Delete teacher
+
+### Student Endpoints
+- `GET /api/students` - List all students
+- `POST /api/students` - Create student
+- `GET /api/students/:id` - Get student details
+- `PATCH /api/students/:id` - Update student
+- `DELETE /api/students/:id` - Delete student
+
+### Attendance Endpoints
+- `GET /api/attendance` - Get attendance records
+- `POST /api/attendance` - Create attendance record
+- `POST /api/attendance/bulk` - Bulk create attendance
+- `GET /api/attendance/my-attendance` - Get student's attendance
+
+For complete API documentation, see [Backend README](./backend/README.md)
+
+## 🚀 Deployment
+
+### Backend Deployment
+
+1. Build the application:
+```bash
+cd backend
+npm run build
+```
+
+2. Set production environment variables
+
+3. Run migrations:
+```bash
+npm run migration:run
+```
+
+4. Start the server:
+```bash
+npm run start:prod
+```
+
+### Frontend Deployment
+
+1. Build the application:
+```bash
+cd frontend
+npm run build
+```
+
+2. Serve the `dist` folder using any static file server (Nginx, Apache, etc.)
+
+## 🧪 Testing
+
+### Backend Tests
+```bash
+cd backend
+npm run test
+```
+
+### Frontend Tests
+```bash
+cd frontend
+npm run test
+```
+
+## 📝 Environment Variables
+
+### Backend (.env)
+```env
+DB_HOST=localhost
+DB_PORT=5432
+DB_USERNAME=postgres
+DB_PASSWORD=your_password
+DB_DATABASE=school_management
+JWT_SECRET=your-secret-key
+JWT_EXPIRATION=24h
+PORT=3000
+NODE_ENV=development
+```
+
+### Frontend (.env)
+```env
+VITE_API_URL=http://localhost:3000/api
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+## 👥 Support
+
+For support, please open an issue in the GitHub repository.
+
+## 🔄 Future Enhancements
+
+- [ ] Email notifications for attendance and announcements
+- [ ] SMS notifications for parents
+- [ ] Exam and grade management
+- [ ] Timetable management
+- [ ] Fee management and payment integration
+- [ ] Library management
+- [ ] Transport management
+- [ ] Parent portal
+- [ ] Mobile application (React Native)
+- [ ] Report generation and PDF export
+- [ ] Advanced analytics and insights
+- [ ] Multi-language support
+- [ ] Dark mode
+- [ ] Real-time notifications using WebSockets
+
+## 📸 Screenshots
+
+(Add screenshots of your application here)
+
+## 🙏 Acknowledgments
+
+- NestJS Documentation
+- React Documentation
+- TailwindCSS Documentation
+- TypeORM Documentation
+- PostgreSQL Documentation
+
