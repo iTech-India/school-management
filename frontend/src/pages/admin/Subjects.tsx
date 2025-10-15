@@ -10,7 +10,15 @@ const Subjects: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [editingSubject, setEditingSubject] = useState<Subject | null>(null);
-  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    getValues,
+    formState: { errors },
+  } = useForm();
 
   useEffect(() => {
     fetchSubjects();
@@ -79,6 +87,7 @@ const Subjects: React.FC = () => {
 
   return (
     <div>
+      {/* Top header */}
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-gray-900">Subjects</h1>
         <button onClick={openAddModal} className="btn btn-primary flex items-center gap-2">
@@ -87,6 +96,7 @@ const Subjects: React.FC = () => {
         </button>
       </div>
 
+      {/* Subject Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {subjects.map((subject) => (
           <div key={subject.id} className="card">
@@ -115,11 +125,10 @@ const Subjects: React.FC = () => {
             )}
             <div className="mt-4 pt-4 border-t border-gray-200">
               <span
-                className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
-                  subject.isActive
-                    ? 'bg-green-100 text-green-800'
-                    : 'bg-gray-100 text-gray-800'
-                }`}
+                className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${subject.isActive
+                  ? 'bg-green-100 text-green-800'
+                  : 'bg-gray-100 text-gray-800'
+                  }`}
               >
                 {subject.isActive ? 'Active' : 'Inactive'}
               </span>
@@ -142,6 +151,7 @@ const Subjects: React.FC = () => {
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+              {/* Subject Name */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Subject Name *
@@ -156,20 +166,44 @@ const Subjects: React.FC = () => {
                 )}
               </div>
 
+              {/* Subject Code with Generate button */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Subject Code *
                 </label>
-                <input
-                  {...register('code', { required: true })}
-                  className="input"
-                  placeholder="MATH101"
-                />
+                <div className="flex gap-2">
+                  <input
+                    {...register('code', { required: true })}
+                    className="input flex-1"
+                    placeholder="MATH123"
+                    
+                  />
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      const subjectName = getValues('name');
+                      if (!subjectName || subjectName.trim().length < 3) {
+                        toast.warning('Enter a valid subject name first');
+                        return;
+                      }
+                      try {
+                        const generatedCode = await subjectService.generateCode(subjectName);
+                        setValue('code', generatedCode);
+                        toast.success('Subject code generated!');
+                      } catch {
+                        toast.error('Failed to generate subject code');
+                      }
+                    }}
+                    className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-md border border-gray-300 transition-all">
+                    <Plus size={16} /> Generate
+                  </button>
+                </div>
                 {errors.code && (
                   <span className="text-red-500 text-sm">This field is required</span>
                 )}
               </div>
 
+              {/* Description */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Description
@@ -177,6 +211,7 @@ const Subjects: React.FC = () => {
                 <textarea {...register('description')} className="input" rows={3} />
               </div>
 
+              {/* Active checkbox */}
               <div className="flex items-center">
                 <input
                   type="checkbox"
@@ -187,6 +222,7 @@ const Subjects: React.FC = () => {
                 <label className="ml-2 block text-sm text-gray-900">Active</label>
               </div>
 
+              {/* Buttons */}
               <div className="flex justify-end gap-4 mt-6">
                 <button
                   type="button"
@@ -208,4 +244,3 @@ const Subjects: React.FC = () => {
 };
 
 export default Subjects;
-

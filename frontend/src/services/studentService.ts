@@ -2,6 +2,14 @@ import api from './api';
 import { Student } from '../types';
 
 export const studentService = {
+
+
+  async getSuggestedRollNumberId() {
+      const response = await api.get('/students/suggest-rollnumber');
+        // assuming backend returns a number, e.g., 21
+        return response.data;
+  },
+
   async getAll(classId?: string): Promise<Student[]> {
     const params = classId ? { classId } : {};
     const response = await api.get<Student[]>('/students', { params });

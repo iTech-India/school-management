@@ -107,5 +107,18 @@ export class StudentService {
     const student = await this.findOne(id);
     await this.usersService.deactivateUser(student.userId);
   }
+
+  async getNextRollNumberId(): Promise<string>{
+    const lastStudent = await this.studentRepository
+          .createQueryBuilder('student')
+          .orderBy('student.rollNumber', 'DESC')
+          .getOne();
+
+    const nextNumber = lastStudent ? parseInt(lastStudent.rollNumber.replace('STU', ''), 10) + 1 : 1;
+
+    const formattedId = `STU${nextNumber.toString().padStart(3, '0')}`;
+
+    return formattedId;
+  }
 }
 

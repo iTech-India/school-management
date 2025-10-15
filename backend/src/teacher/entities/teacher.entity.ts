@@ -37,7 +37,7 @@ export class Teacher {
   @Column({ nullable: true })
   qualification: string;
 
-  @OneToOne(() => User, (user) => user.teacher)
+  @OneToOne(() => User, (user) => user.teacher, { onDelete : 'CASCADE' })
   @JoinColumn()
   user: User;
 

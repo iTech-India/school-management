@@ -23,6 +23,13 @@ import { UserRole } from '../users/enums/user-role.enum';
 export class StudentController {
   constructor(private readonly studentService: StudentService) {}
 
+  @Get('suggest-rollnumber')
+  @Roles(UserRole.ADMIN)
+  async suggestRollNumberId() {
+    return await this.studentService.getNextRollNumberId();
+    // returns string like "EMP021"
+  }
+
   @Post()
   @Roles(UserRole.ADMIN)
   create(@Body() createStudentDto: CreateStudentDto) {

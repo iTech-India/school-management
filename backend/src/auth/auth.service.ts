@@ -77,10 +77,21 @@ export class AuthService {
   }
 
   private async generateRollNumber(): Promise<string> {
-    const year = new Date().getFullYear();
-    const count = await this.studentRepository.count();
-    const paddedCount = String(count + 1).padStart(4, '0');
-    return `STU${year}${paddedCount}`;
+    //const year = new Date().getFullYear();
+    // const count = await this.studentRepository.count();
+    // const paddedCount = String(count + 1).padStart(4, '0');
+    // return `STU${paddedCount}`;
+
+    const lastStudent = await this.studentRepository
+          .createQueryBuilder('student')
+          .orderBy('student.rollNumber', 'DESC')
+          .getOne();
+
+    const nextNumber = lastStudent ? parseInt(lastStudent.rollNumber.replace('STU', ''), 10) + 1 : 1;
+
+    const formattedId = `STU${nextNumber.toString().padStart(3, '0')}`;
+
+    return formattedId;
   }
 
   async verifyEmail(verifyEmailDto: VerifyEmailDto) {
@@ -161,10 +172,10 @@ export class AuthService {
   async forgotPassword(forgotPasswordDto: ForgotPasswordDto) {
     const user = await this.usersService.findByEmail(forgotPasswordDto.email);
     
-    if (!user) {
+    if (!user) throw new BadRequestException("Email not found");
       // Don't reveal if email exists or not for security
-      return { message: 'If your email is registered, you will receive a password reset link.' };
-    }
+      //return { message: 'If your email is registered, you will receive a password reset link.' };
+    
 
     // Generate reset token
     const resetToken = randomBytes(32).toString('hex');

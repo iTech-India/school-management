@@ -99,6 +99,29 @@ export class TeacherService {
   async remove(id: string): Promise<void> {
     const teacher = await this.findOne(id);
     await this.usersService.deactivateUser(teacher.userId);
+
+    await this.teacherRepository.remove(teacher);
+  }
+
+  //added
+  async delete(id : string) : Promise<void>{
+
+    const teacher = await this.findOne(id);
+
+    await this.teacherRepository.delete(teacher);
+  }
+
+  async getNextEmployeeId(): Promise<string>{
+    const lastTeacher = await this.teacherRepository
+          .createQueryBuilder('teacher')
+          .orderBy('teacher.employeeId', 'DESC')
+          .getOne();
+
+    const nextNumber = lastTeacher ? parseInt(lastTeacher.employeeId.replace('EMP', ''), 10) + 1 : 1;
+
+    const formattedId = `EMP${nextNumber.toString().padStart(3, '0')}`;
+
+    return formattedId;
   }
 }
 

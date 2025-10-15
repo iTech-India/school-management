@@ -5,12 +5,14 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  Unique,
 } from 'typeorm';
 import { Student } from '../../student/entities/student.entity';
 import { TeacherAssignment } from '../../teacher-assignment/entities/teacher-assignment.entity';
 import { Attendance } from '../../attendance/entities/attendance.entity';
 
 @Entity('classes')
+//@Unique(['name', 'section'])
 export class Class {
   @PrimaryGeneratedColumn('uuid')
   id: string;

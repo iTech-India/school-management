@@ -25,5 +25,10 @@ export const subjectService = {
   async delete(id: string): Promise<void> {
     await api.delete(`/subjects/${id}`);
   },
+
+  async generateCode(subjectName: string) {
+    const response = await api.post('/subjects/generate-code', { name: subjectName });
+    return response.data; // e.g. "MAT734"
+  }
 };
 

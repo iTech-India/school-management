@@ -19,7 +19,13 @@ import { UserRole } from '../users/enums/user-role.enum';
 @Controller('subjects')
 @UseGuards(JwtAuthGuard, RolesGuard)
 export class SubjectsController {
-  constructor(private readonly subjectsService: SubjectsService) {}
+  constructor(private readonly subjectsService: SubjectsService) { }
+
+  @Post('generate-code')
+  @Roles(UserRole.ADMIN)
+  async generateCode(@Body('name') name: string) {
+    return await this.subjectsService.generateCode(name);
+  }
 
   @Post()
   @Roles(UserRole.ADMIN)

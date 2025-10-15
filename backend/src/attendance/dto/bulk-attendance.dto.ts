@@ -13,5 +13,6 @@ export class BulkAttendanceDto {
   @ValidateNested({ each: true })
   @Type(() => CreateAttendanceDto)
   attendances: CreateAttendanceDto[];
+  
 }
 

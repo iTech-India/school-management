@@ -2,6 +2,13 @@ import api from './api';
 import { Teacher } from '../types';
 
 export const teacherService = {
+
+  async getSuggestedEmployeeId() {
+    const response = await api.get('/teachers/suggest-employee-id');
+      // assuming backend returns a number, e.g., 21
+      return response.data;
+  },
+
   async getAll(): Promise<Teacher[]> {
     const response = await api.get<Teacher[]>('/teachers');
     return response.data;
@@ -30,5 +37,7 @@ export const teacherService = {
   async delete(id: string): Promise<void> {
     await api.delete(`/teachers/${id}`);
   },
+
+  
 };
 

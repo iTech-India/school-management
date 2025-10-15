@@ -13,9 +13,18 @@ export class SubjectsService {
   ) {}
 
   async create(createSubjectDto: CreateSubjectDto): Promise<Subject> {
+
+    if(!createSubjectDto.code){
+      createSubjectDto.code = this.generateSubjectCode(createSubjectDto.name);
+    }
+
     const existingSubject = await this.subjectRepository.findOne({
-      where: [{ name: createSubjectDto.name }, { code: createSubjectDto.code }],
+      where: [
+        { name: createSubjectDto.name },
+        { code: createSubjectDto.code }
+      ],
     });
+
     if (existingSubject) {
       throw new BadRequestException('Subject name or code already exists');
     }
@@ -50,6 +59,22 @@ export class SubjectsService {
   async remove(id: string): Promise<void> {
     const subject = await this.findOne(id);
     await this.subjectRepository.update(id, { isActive: false });
+  }
+
+  private generateSubjectCode(name : string):string{
+
+    const prefix = name ? name.slice(0, 3).toUpperCase() : 'SUB';
+
+    const random = Math.floor(100 + Math.random() * 900);
+
+    return `${prefix}${random}`;
+  }
+
+  async generateCode(name: string): Promise<string> {
+    if (!name || name.trim().length === 0) {
+      throw new BadRequestException('Subject name is required to generate code');
+    }
+    return this.generateSubjectCode(name);
   }
 }
 

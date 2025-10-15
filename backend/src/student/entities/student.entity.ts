@@ -42,7 +42,7 @@ export class Student {
   @Column({ type: 'date' })
   admissionDate: Date;
 
-  @OneToOne(() => User, (user) => user.student)
+  @OneToOne(() => User, (user) => user.student, { onDelete : 'CASCADE' })
   @JoinColumn()
   user: User;
 

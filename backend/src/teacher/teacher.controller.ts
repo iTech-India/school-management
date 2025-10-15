@@ -20,7 +20,14 @@ import { UserRole } from '../users/enums/user-role.enum';
 @Controller('teachers')
 @UseGuards(JwtAuthGuard, RolesGuard)
 export class TeacherController {
-  constructor(private readonly teacherService: TeacherService) {}
+  constructor(private readonly teacherService: TeacherService) { }
+
+  @Get('suggest-employee-id')
+  @Roles(UserRole.ADMIN)
+  async suggestEmployeeId() {
+    return await this.teacherService.getNextEmployeeId();
+    // returns string like "EMP021"
+  }
 
   @Post()
   @Roles(UserRole.ADMIN)
@@ -57,5 +64,13 @@ export class TeacherController {
   remove(@Param('id') id: string) {
     return this.teacherService.remove(id);
   }
+
+  @Delete('/delete/:id')
+  @Roles(UserRole.ADMIN)
+  delete(@Param('id') id: string) {
+    return this.teacherService.delete(id);
+  }
+
+  
 }
 

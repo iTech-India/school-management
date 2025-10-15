@@ -2,9 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { authService } from '../../services/authService';
 import { useAuth } from '../../context/AuthContext';
-import { toast } from 'react-toastify';
 import { GraduationCap } from 'lucide-react';
 import { loginSchema, type LoginFormData } from '../../schemas/auth.schema';
 import FormField from '../../components/FormField';
@@ -24,11 +22,11 @@ const Login: React.FC = () => {
   const onSubmit = async (data: LoginFormData) => {
     try {
       await login(data);
-      toast.success('Login successful!');
+      //toast.success('Login successful!');
       navigate('/dashboard');
     } catch (error: any) {
       const message = error.response?.data?.message || 'Login failed';
-      toast.error(message);
+      //toast.error(message);
     }
   };
 

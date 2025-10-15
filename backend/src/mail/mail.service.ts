@@ -178,4 +178,3 @@ export class MailService {
     await this.sendEmail(email, 'Reset Your Password', html);
   }
 }
-

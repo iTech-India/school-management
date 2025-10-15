@@ -120,11 +120,10 @@ const Classes: React.FC = () => {
             )}
             <div className="mt-4 pt-4 border-t border-gray-200">
               <span
-                className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
-                  classItem.isActive
+                className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${classItem.isActive
                     ? 'bg-green-100 text-green-800'
                     : 'bg-gray-100 text-gray-800'
-                }`}
+                  }`}
               >
                 {classItem.isActive ? 'Active' : 'Inactive'}
               </span>
@@ -147,29 +146,48 @@ const Classes: React.FC = () => {
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+              {/* Class Name Dropdown */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Class Name *
                 </label>
-                <input
+                <select
                   {...register('name', { required: true })}
                   className="input"
-                  placeholder="Class 10"
-                />
+                  defaultValue=""
+                >
+                  <option value="" disabled>
+                    Select Class
+                  </option>
+                  {[6, 7, 8, 9, 10, 11, 12].map((num) => (
+                    <option key={num} value={`Class ${num}`}>
+                      Class {num}
+                    </option>
+                  ))}
+                </select>
                 {errors.name && (
                   <span className="text-red-500 text-sm">This field is required</span>
                 )}
               </div>
 
+              {/* Section Dropdown */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Section</label>
-                <input
-                  {...register('section')}
-                  className="input"
-                  placeholder="A, B, C"
-                />
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Section
+                </label>
+                <select {...register('section')} className="input" defaultValue="">
+                  <option value="" disabled>
+                    Select Section
+                  </option>
+                  {['A', 'B', 'C', 'D', 'E', 'F'].map((sec) => (
+                    <option key={sec} value={sec}>
+                      {sec}
+                    </option>
+                  ))}
+                </select>
               </div>
 
+              {/* Description */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Description
@@ -182,8 +200,7 @@ const Classes: React.FC = () => {
                   type="checkbox"
                   {...register('isActive')}
                   className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
-                  defaultChecked
-                />
+                  defaultChecked/>
                 <label className="ml-2 block text-sm text-gray-900">Active</label>
               </div>
 
@@ -191,8 +208,7 @@ const Classes: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="btn btn-secondary"
-                >
+                  className="btn btn-secondary">
                   Cancel
                 </button>
                 <button type="submit" className="btn btn-primary">
@@ -200,6 +216,7 @@ const Classes: React.FC = () => {
                 </button>
               </div>
             </form>
+
           </div>
         </div>
       )}

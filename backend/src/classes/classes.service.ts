@@ -10,14 +10,18 @@ export class ClassesService {
   constructor(
     @InjectRepository(Class)
     private classRepository: Repository<Class>,
-  ) {}
+  ) { }
 
   async create(createClassDto: CreateClassDto): Promise<Class> {
+
+    const { name, section } = createClassDto;
+
     const existingClass = await this.classRepository.findOne({
-      where: { name: createClassDto.name },
+      where: { name, section },
     });
+
     if (existingClass) {
-      throw new BadRequestException('Class name already exists');
+      throw new BadRequestException('Class with this name and section already exists');
     }
 
     const classEntity = this.classRepository.create(createClassDto);
@@ -42,6 +46,18 @@ export class ClassesService {
   }
 
   async update(id: string, updateClassDto: UpdateClassDto): Promise<Class> {
+
+    // updated code
+    const { name, section } = updateClassDto;
+
+    const existingClass = await this.classRepository.findOne({
+      where: { name, section },
+    });
+
+    if (existingClass && existingClass.id !== id) {
+      throw new BadRequestException("Class with this name already exists");
+    }
+
     const classEntity = await this.findOne(id);
     Object.assign(classEntity, updateClassDto);
     return await this.classRepository.save(classEntity);
@@ -50,6 +66,8 @@ export class ClassesService {
   async remove(id: string): Promise<void> {
     const classEntity = await this.findOne(id);
     await this.classRepository.update(id, { isActive: false });
+
+    await this.classRepository.remove(classEntity);
   }
 }
 
